@@ -3,9 +3,6 @@
 # Update APT configuration
 - name: add virtualbox repository
   apt_key: 
-    url: https://www.virtualbox.org/download/oracle_vbox_2016.asc
-    state: present
-  apt_key: 
     url: https://www.virtualbox.org/download/oracle_vbox.asc
     state: present
   apt_repository: >
