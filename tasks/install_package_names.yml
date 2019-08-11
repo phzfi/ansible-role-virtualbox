@@ -1,7 +1,17 @@
 ---
+- name: uninstall {{conflicting_package_names | join(' ')}} with default package manager
+  action: "{{backcompat_pkg_mgr}} name={{item}} state=absent update_cache=yes"
+  become: yes
+  register: result_default
+  until: result_default|success
+  when: >
+    package_names is defined and
+    (backcompat_pkg_mgr == "yum" or backcompat_pkg_mgr == "apt")
+  with_items: "{{ package_names }}"
+
 - name: install {{package_names | join(' ')}} with default package manager
-  action: "{{backcompat_pkg_mgr}} name={{item}}"
-  sudo: yes
+  action: "{{backcompat_pkg_mgr}} name={{item}} state=latest"
+  become: yes
   register: result_default
   until: result_default|success
   when: >
