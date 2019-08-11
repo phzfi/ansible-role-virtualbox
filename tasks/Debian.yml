@@ -1,16 +1,19 @@
 ---
 
 # Update APT configuration
+- name: Update key
+  apt_key: 
+    url: https://www.virtualbox.org/download/oracle_vbox.asc
+    state: present
+  sudo: yes
+  when: ( ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian' )
 - name: add virtualbox repository
-  - apt_key: 
-      url: https://www.virtualbox.org/download/oracle_vbox.asc
-      state: present
-  - apt_repository: >
-      repo="deb http://download.virtualbox.org/virtualbox/debian {{ansible_lsb.codename|lower}} contrib"
-      state=present
-    register: virtualbox_result
-    sudo: yes
-    when: ( ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian' )
+  apt_repository: >
+    repo="deb http://download.virtualbox.org/virtualbox/debian {{ansible_lsb.codename|lower}} contrib"
+    state=present
+  register: virtualbox_result
+  sudo: yes
+  when: ( ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian' )
 
 
 # Download keys and package lists
