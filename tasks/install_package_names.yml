@@ -1,6 +1,6 @@
 ---
 - name: uninstall {{conflicting_package_names | join(' ')}} with default package manager
-  action: "{{backcompat_pkg_mgr}} name={{item}} state=absent update_cache=yes"
+  action: "{{backcompat_pkg_mgr}} name={{item}} state=absent update_cache=yes autoremove=yes"
   become: yes
   register: result_default
   until: result_default is success
