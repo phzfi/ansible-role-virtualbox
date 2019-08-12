@@ -2,6 +2,7 @@
 package_names:
 - virtualbox-6.0
 conflicting_package_names:
+- virtualbox-dkms
 - virtualbox-5.2
 - virtualbox-5.1
 - virtualbox-5.0
