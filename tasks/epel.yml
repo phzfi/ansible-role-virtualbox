@@ -1,8 +1,8 @@
 ---
 - name: Install redhat-lsb
-  sudo: yes
+  become: yes
   register: result_redhat_lsb
-  until: result_redhat_lsb|success
+  until: result_redhat_lsb is success
   yum:
     name: redhat-lsb
     state: present
@@ -15,9 +15,9 @@
   register: epel_repofile_result
 
 - name: Install EPEL repo.
-  sudo: yes
+  become: yes
   register: result_epel_release
-  until: result_epel_release|success
+  until: result_epel_release is success
   yum:
     name: epel-release
     state: present
